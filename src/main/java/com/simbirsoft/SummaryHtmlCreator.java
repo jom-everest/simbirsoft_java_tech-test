@@ -1,4 +1,4 @@
-package summaryhtmlcreator;
+package com.simbirsoft;
 
 /**
  *
@@ -30,7 +30,7 @@ public class SummaryHtmlCreator {
             }
             
             // creating parser-object, that will be parse ".properties" file on keys and values 
-            DataLoaderClass parser = new ParserPropertiesFile(subjectName + ".properties");
+            DataLoaderService parser = new ParserPropertiesFile(subjectName + ".properties");
             
             // creating adapter-object, that will be extract only necessary "person" 
             // data with "parser"
@@ -38,14 +38,14 @@ public class SummaryHtmlCreator {
             PersonInfo pInfo = adapter.getData();
             
             // phase of creating summary html file on data of "properties" file
-            ViewCreatorClass cr = new HtmlCreator("summary_" + subjectName + ".html");
+            ViewCreatorService cr = new HtmlCreator("summary_" + subjectName + ".html");
             cr.create(pInfo);
             
             System.out.println("summary_" + subjectName + ".html was created successfully");
             
-        } catch (DataLoaderClass.DataLoaderException e) {
+        } catch (DataLoaderService.DataLoaderException e) {
             System.err.println(e.getMessage());
-        } catch (ViewCreatorClass.ViewCreatorException e) {
+        } catch (ViewCreatorService.ViewCreatorException e) {
             System.err.println(e.getMessage());
 //            e.printStackTrace();
         }

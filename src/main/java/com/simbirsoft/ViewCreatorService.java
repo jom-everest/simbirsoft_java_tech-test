@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package summaryhtmlcreator;
+package com.simbirsoft;
 
 /**
  *
  * @author slava
  */
-abstract public class ViewCreatorClass {
+public interface ViewCreatorService {
 
     /**
      * <p>It's abstract method for creating an view for PersonInfo data</p>
@@ -17,7 +17,7 @@ abstract public class ViewCreatorClass {
      * @param personInfo
      * @throws ViewCreatorException
      */
-    abstract public void create(PersonInfo personInfo) throws ViewCreatorException;
+    abstract public void create(PersonInfo personInfo)throws ViewCreatorException;
     
     class ViewCreatorException extends Exception {
         ViewCreatorException(String msg) {
@@ -28,3 +28,5 @@ abstract public class ViewCreatorClass {
         }
     }
 }
+
+

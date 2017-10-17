@@ -1,10 +1,10 @@
-package summaryhtmlcreator;
+package com.simbirsoft;
 
 /**
  *
  * @author slava
  */
-abstract public class DataLoaderClass {
+public interface DataLoaderService {
     abstract public Map_SL getData() throws DataLoaderException;
     
     class DataLoaderException extends Exception {

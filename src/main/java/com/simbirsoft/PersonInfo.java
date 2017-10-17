@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package summaryhtmlcreator;
+package com.simbirsoft;
 
 import java.util.ArrayList;
 
@@ -12,6 +12,19 @@ import java.util.ArrayList;
  * @author slava
  */
 public class PersonInfo {
+    static final String FIO = "fio";
+    static final String DOB = "dob";
+    static final String EMAIL = "email";
+    static final String SKYPE = "skype";
+    static final String AVATAR = "avatar";
+    static final String EDUCATION = "education";
+    static final String PHONE = "phone";
+    static final String ADD_EDUCATION = "add_education";
+    static final String EXPERIENCE = "experience";
+    static final String HOBBIES = "hobbies";
+    static final String TARGET = "target";
+    static final String SKILLS = "skills";
+
     public String fio;  // фамилия
     public String dob;
     public String email;

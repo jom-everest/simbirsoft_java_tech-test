@@ -1,4 +1,4 @@
-package summaryhtmlcreator;
+package com.simbirsoft;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -15,7 +15,7 @@ import org.jsoup.nodes.Element;
  */
 
 
-public class HtmlCreator extends ViewCreatorClass {
+public class HtmlCreator implements ViewCreatorService {
     String fileName = "summary.html";
     
     // первоначальный html шаблон 
@@ -72,7 +72,7 @@ public class HtmlCreator extends ViewCreatorClass {
     }
     
     @Override
-    public void create(PersonInfo pInfo) throws ViewCreatorException {
+    public void create(PersonInfo pInfo) throws ViewCreatorException{
         String htmlStr = modifyHtml(pInfo);
         try {
             // попытка сохранить строку в файл
@@ -87,43 +87,6 @@ public class HtmlCreator extends ViewCreatorClass {
     public static void saveStrToFile(String str, String fileName) throws IOException {
         Files.write(Paths.get(fileName), str.getBytes(StandardCharsets.UTF_8));
     }
-    
-    /*
-    private String modifyHtml(PersonInfo pInfo) {
-        
-        Document html = Jsoup.parse(SAMPLE_HTML);
-        
-        // add fio
-        html.select("div.fio").html(
-                pInfo.fio.isEmpty() ? "-" : pInfo.fio);
-        
-        //add bod
-        html.select("div.dob").html(
-                pInfo.dob.isEmpty() ? "-" : pInfo.dob);
-
-        // add skype
-        html.select("div.skype").html(
-                pInfo.skype.isEmpty() ? "-" : pInfo.skype);
-        
-        // add e-mail
-        html.select("div.email").html(
-                pInfo.email.isEmpty() ? "-" : pInfo.email);
-        
-        html.select("div.phone").html(
-                pInfo.phone.isEmpty() ? "-" : pInfo.phone);
-        
-        html.select("div.avatar").html(createHtmlImg(pInfo.avatar));
-        
-        html.select("div.education *:last-child").html(createHtmlList(pInfo.education));
-        html.select("div.add_education *:last-child").html(createHtmlList(pInfo.add_education));
-        html.select("div.hobbies *:last-child").html(createHtmlList(pInfo.hobbies));
-        html.select("div.target *:last-child").html(createHtmlList(pInfo.target));
-        html.select("div.experience *:last-child").html(createHtmlList(pInfo.experience));
-        html.select("div.skills *:last-child").html(createHtmlList(pInfo.skills));
-        
-        return html.toString();
-    }
-    */
     
     // создание html элемента - список
     private String createHtmlList(ArrayList<String> list) {

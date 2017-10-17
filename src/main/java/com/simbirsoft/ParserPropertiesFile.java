@@ -1,4 +1,4 @@
-package summaryhtmlcreator;
+package com.simbirsoft;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
  *
  * @author slava
  */
-public class ParserPropertiesFile extends DataLoaderClass {
+public class ParserPropertiesFile implements DataLoaderService {
     
     private String fileName;
     
