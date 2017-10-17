@@ -17,23 +17,34 @@
 	<maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.source>1.8</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.resources.plugin.version>3.0.2</maven.resources.plugin.version>
-	 <class.path>jars/</class.path>
+	<class.path>libs/</class.path>
   </properties>
 	
   <build>
     <directory>${project.basedir}/build</directory>
+	
     <plugins>
+	
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.7.0</version>
+        <configuration>
+		  <optimize>true</optimize>
+		  <debug>false</debug>
+		</configuration>
+      </plugin>
+	
 	  <plugin>
         <groupId>org.apache.maven.plugins</groupId>
 		<artifactId>maven-resources-plugin</artifactId>
-		<version>${maven.resources.plugin.version}</version>
+		<version>3.0.2</version>
 		<executions>
           <execution>
             <id>resources</id>
-            <phase>package</phase>
+            <phase>process-resources</phase>
             <goals>
-              <goal>resources</goal>
+			  <goal>copy-resources</goal>
             </goals>
             <configuration>
               <outputDirectory>${project.basedir}/build</outputDirectory>
@@ -53,7 +64,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
-		<version>${maven.resources.plugin.version}</version>
+		<version>3.0.2</version>
         <configuration>
           <archive>
             <manifest>
@@ -68,7 +79,7 @@
 	  <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
-        <version>${maven.resources.plugin.version}</version>
+        <version>3.0.2</version>
         <executions>
           <execution>
             <id>copy-dependencies</id>
@@ -103,7 +114,6 @@
       <scope>test</scope>
 	</dependency>  
       
-	  
 	<dependency>
 		<groupId>org.jsoup</groupId>
 		<artifactId>jsoup</artifactId>
@@ -117,7 +127,6 @@
 	  <version>2.9.9</version>
 	</dependency>
 
-	  
 	<dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
