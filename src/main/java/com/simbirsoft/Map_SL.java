@@ -10,6 +10,7 @@ import java.util.HashMap;
 
 
 public class Map_SL extends HashMap<String, ArrayList<String>> {
+    
     public ArrayList<String> safeGet(String key) {
         ArrayList<String> tmp = get(key);
         return (tmp != null) ? tmp : new ArrayList<>();

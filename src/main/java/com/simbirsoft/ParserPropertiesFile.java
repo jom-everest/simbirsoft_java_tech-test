@@ -46,8 +46,6 @@ public class ParserPropertiesFile implements DataLoaderService {
             Pattern pattern = Pattern.compile("\\s*\"?([^\"]+)\"?\\s*=\\s*\"?\\s*(.*?)\\s*\"?\\s*$");
             Matcher matcher;
             
-           // String line = reader.readLine();
-          //  while (line != null) {
             // попеременное чтение всех строк файла
             for (String line = reader.readLine(); line != null; line = reader.readLine()) {
                 matcher = pattern.matcher(line);
@@ -64,7 +62,6 @@ public class ParserPropertiesFile implements DataLoaderService {
                 
                 // запись ключ + значение в массив
                 map.putIfAbsent(key, values);
-            //    line = reader.readLine();
             }
             reader.close();
         }

@@ -39,26 +39,30 @@ public class PersonInfo {
     public ArrayList<String> skills;
 /*    
     
-    public class CharacterName {
+    public class Characteristic {
         public ArrayList<String> value = new ArrayList<>();
-        public String description;
-        public CharacterName(String s) {
-            description = s;
+        public String name;
+        public String shortName;
+        public bool isMulti;
+        public Characteristic(String name, String shortName, bool isMulti = false) {
+            this.name = name;
+            this.shortName = shortName;
+            this.isMulti = isMulti;
         }
     }
-    public CharacterName fio = new CharacterName("Фамилия Имя Отчество");
-    public CharacterName dob = new CharacterName("Дата рождения");
-    public CharacterName email = new CharacterName("e-mail");
-    public CharacterName skype = new CharacterName("Skype");
-    public CharacterName avatar = new CharacterName("Иконка");
-    public CharacterName phone = new CharacterName("Телефон");
+    public Characteristic fio = new CharacterName("Фамилия Имя Отчество", "fio");
+    public Characteristic dob = new CharacterName("Дата рождения", "dob");
+    public CharacterName email = new CharacterName("e-mail", "email");
+    public CharacterName skype = new CharacterName("Skype", "skype");
+    public CharacterName avatar = new CharacterName("Иконка", "avatar");
+    public CharacterName phone = new CharacterName("Телефон", "phone");
     
-    public CharacterName education = new CharacterName("Образование");
-    public CharacterName add_education = new CharacterName("Дополнительное образование и курсы");
-    public CharacterName experience = new CharacterName("Опыт работы");
-    public CharacterName hobbies = new CharacterName("Хобби");
-    public CharacterName target = new CharacterName("Цель");
-    public CharacterName skills = new CharacterName("Нпвыки");
+    public CharacterName education = new CharacterName("Образование", "education", true);
+    public CharacterName add_education = new CharacterName("Дополнительное образование и курсы", "add_education", true);
+    public CharacterName experience = new CharacterName("Опыт работы", "experience", true);
+    public CharacterName hobbies = new CharacterName("Хобби", "hobbies", true);
+    public CharacterName target = new CharacterName("Цель", "target", true);
+    public CharacterName skills = new CharacterName("Нпвыки", "skills", true);
     
     enum TypeElem {imgRef, text};
     enum CatagoryElem {personal, prof};
