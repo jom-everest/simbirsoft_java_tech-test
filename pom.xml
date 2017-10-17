@@ -13,10 +13,12 @@
 
   
   <properties>
+    <jdk.version>1.8</jdk.version>
 	<maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.source>1.8</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.resources.plugin.version>3.0.2</maven.resources.plugin.version>
+	 <class.path>jars/</class.path>
   </properties>
 	
   <build>
@@ -56,11 +58,32 @@
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
-              <mainClass>summaryhtmlcreator.SummaryHtmlCreator</mainClass>
+              <mainClass>com.simbirsoft.SummaryHtmlCreator</mainClass>
+			  <classpathPrefix>${class.path}</classpathPrefix>
             </manifest>
           </archive>
         </configuration>
       </plugin>
+	  
+	  <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>${maven.resources.plugin.version}</version>
+        <executions>
+          <execution>
+            <id>copy-dependencies</id>
+            <phase>package</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <includeGroupIds>org</includeGroupIds>
+              <outputDirectory>${project.build.directory}/${class.path}</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+	  
     </plugins>
   </build>
 
@@ -85,6 +108,7 @@
 		<groupId>org.jsoup</groupId>
 		<artifactId>jsoup</artifactId>
 		<version>1.10.3</version>
+		<scope>compile</scope>
 	</dependency>
 
 	<dependency>
