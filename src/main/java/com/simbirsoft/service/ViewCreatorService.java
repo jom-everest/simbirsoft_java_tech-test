@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.simbirsoft;
+package com.simbirsoft.service;
+
+import com.simbirsoft.entity.PersonInfo;
 
 /**
  *
@@ -17,13 +19,13 @@ public interface ViewCreatorService {
      * @param personInfo
      * @throws ViewCreatorException
      */
-    abstract public void create(PersonInfo personInfo)throws ViewCreatorException;
+    void create(PersonInfo personInfo)throws ViewCreatorException;
     
     class ViewCreatorException extends Exception {
-        ViewCreatorException(String msg) {
+        public ViewCreatorException(String msg) {
             super(msg);
         }
-        ViewCreatorException(Exception e) {
+        public ViewCreatorException(Exception e) {
             super(e);
         }
     }

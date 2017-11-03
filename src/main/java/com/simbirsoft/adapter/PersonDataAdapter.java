@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.simbirsoft;
+package com.simbirsoft.adapter;
 
+import com.simbirsoft.data_loader.Map_SL;
+import com.simbirsoft.entity.PersonInfo;
+import com.simbirsoft.data_loader.DataLoaderService;
 import java.util.ArrayList;
 
 /** Класс создает персональные данные PersonInfo, извлекая их из обобщенного 
@@ -13,7 +16,7 @@ import java.util.ArrayList;
  * @author slava
  */
 public class PersonDataAdapter {
-    final private DataLoaderService loader;
+    private final DataLoaderService loader;
     
     public PersonDataAdapter(DataLoaderService ld) {
         loader = ld;
@@ -43,5 +46,4 @@ public class PersonDataAdapter {
                 
         return pInfo;
     }
-    
 }

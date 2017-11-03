@@ -1,11 +1,18 @@
 package com.simbirsoft;
 
+import com.simbirsoft.adapter.PersonDataAdapter;
+import com.simbirsoft.entity.PersonInfo;
+import com.simbirsoft.data_loader.impl.ParserPropertiesFile;
+import com.simbirsoft.data_loader.DataLoaderService;
+import com.simbirsoft.service.impl_htmlcreator.HtmlCreator;
+import com.simbirsoft.service.ViewCreatorService;
+
 /**
  *
  * @author slava
  * 
  */
-public class SummaryHtmlCreator {
+public class Application {
 
     /**
      * @param args аргумент 
@@ -38,16 +45,16 @@ public class SummaryHtmlCreator {
             PersonInfo pInfo = adapter.getData();
             
             // phase of creating summary html file on data of "properties" file
-            ViewCreatorService cr = new HtmlCreator("summary_" + subjectName + ".html");
-            cr.create(pInfo);
+            String viewFileName = "summary_" + subjectName + ".html";
+            ViewCreatorService viewCreator = new HtmlCreator(viewFileName);
+            viewCreator.create(pInfo);
             
-            System.out.println("summary_" + subjectName + ".html was created successfully");
+            System.out.println(viewFileName + " was created successfully");
             
         } catch (DataLoaderService.DataLoaderException e) {
             System.err.println(e.getMessage());
         } catch (ViewCreatorService.ViewCreatorException e) {
             System.err.println(e.getMessage());
-//            e.printStackTrace();
         }
     }
 }

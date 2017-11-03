@@ -1,8 +1,11 @@
-package com.simbirsoft;
+package com.simbirsoft.data_loader.impl;
 
+import com.simbirsoft.data_loader.Map_SL;
+import com.simbirsoft.data_loader.DataLoaderService;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.charset.MalformedInputException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -27,8 +30,8 @@ public class ParserPropertiesFile implements DataLoaderService {
     }
     
     public ParserPropertiesFile() {
-        
     }
+    
     public ParserPropertiesFile(String fn) {
         setFile(fn);
     }
@@ -37,17 +40,17 @@ public class ParserPropertiesFile implements DataLoaderService {
     public Map_SL getData() throws DataLoaderException {
         
         Map_SL map = new Map_SL();
-        BufferedReader reader;
-        try {
-            reader = Files.newBufferedReader(Paths.get(fileName), StandardCharsets.UTF_8);
- //           reader = new BufferedReader(new FileReader(fileName));
+        
+        // чтение настроек из внешнего файла, если таковой отсутствует то из внутреннего 
+        try (BufferedReader reader = (Files.exists(Paths.get(fileName))) ? 
+                Files.newBufferedReader(Paths.get(fileName), StandardCharsets.UTF_8) :
+                new BufferedReader(new InputStreamReader(getClass().getClassLoader().getResourceAsStream(fileName), 
+                        StandardCharsets.UTF_8))) {
             
             // подготовка рег. выражения для разбора строк файла
             Pattern pattern = Pattern.compile("\\s*\"?([^\"]+)\"?\\s*=\\s*\"?\\s*(.*?)\\s*\"?\\s*$");
             Matcher matcher;
             
-           // String line = reader.readLine();
-          //  while (line != null) {
             // попеременное чтение всех строк файла
             for (String line = reader.readLine(); line != null; line = reader.readLine()) {
                 matcher = pattern.matcher(line);
@@ -64,9 +67,7 @@ public class ParserPropertiesFile implements DataLoaderService {
                 
                 // запись ключ + значение в массив
                 map.putIfAbsent(key, values);
-            //    line = reader.readLine();
             }
-            reader.close();
         }
         catch (FileNotFoundException e) {
             throw new DataLoaderException(e.getMessage());
@@ -83,5 +84,4 @@ public class ParserPropertiesFile implements DataLoaderService {
         
         return map;
     }
-    
 }

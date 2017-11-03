@@ -1,5 +1,7 @@
-package com.simbirsoft;
+package com.simbirsoft.service.impl_htmlcreator;
 
+import com.simbirsoft.entity.PersonInfo;
+import com.simbirsoft.service.ViewCreatorService;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -125,7 +127,7 @@ public class HtmlCreator implements ViewCreatorService {
         
         elem = html.select("div.prof").first();
         
-        // вставка данных, связанных с проффесиональной  деятельностью человека
+        // вставка данных, связанных с профессиональной  деятельностью человека
         elem.append(getHtml_profBlock(pInfo.target, "Цель", "target"));
         elem.append(getHtml_profBlock(pInfo.experience, "Опыт работы", "experience"));
         elem.append(getHtml_profBlock(pInfo.education, "Образование", "education"));

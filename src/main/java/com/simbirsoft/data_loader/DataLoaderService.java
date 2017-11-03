@@ -1,4 +1,4 @@
-package com.simbirsoft;
+package com.simbirsoft.data_loader;
 
 /**
  *
@@ -8,7 +8,7 @@ public interface DataLoaderService {
     abstract public Map_SL getData() throws DataLoaderException;
     
     class DataLoaderException extends Exception {
-        DataLoaderException(String msg) {
+        public DataLoaderException(String msg) {
             super(msg);
         }
     }
