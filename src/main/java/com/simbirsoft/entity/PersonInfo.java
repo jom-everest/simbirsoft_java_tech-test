@@ -5,7 +5,7 @@
  */
 package com.simbirsoft.entity;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /** Открытая структура, содержащие некоторые данные по конкретному человеку 
  *
@@ -31,12 +31,12 @@ public class PersonInfo {
     public String skype;
     public String avatar;
     public String phone;
-    public ArrayList<String> education;
-    public ArrayList<String> add_education;
-    public ArrayList<String> experience;
-    public ArrayList<String> hobbies;
-    public ArrayList<String> target;
-    public ArrayList<String> skills;
+    public List<String> education;
+    public List<String> add_education;
+    public List<String> experience;
+    public List<String> hobbies;
+    public List<String> target;
+    public List<String> skills;
 }
 
 

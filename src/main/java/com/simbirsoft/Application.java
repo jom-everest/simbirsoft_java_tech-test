@@ -2,8 +2,8 @@ package com.simbirsoft;
 
 import com.simbirsoft.adapter.PersonDataAdapter;
 import com.simbirsoft.entity.PersonInfo;
-import com.simbirsoft.data_loader.impl.ParserPropertiesFile;
 import com.simbirsoft.data_loader.DataLoaderService;
+import com.simbirsoft.data_loader.impl.ParserPropertiesFile_MultiThread;
 import com.simbirsoft.service.impl_htmlcreator.HtmlCreator;
 import com.simbirsoft.service.ViewCreatorService;
 
@@ -37,7 +37,8 @@ public class Application {
             }
             
             // creating parser-object, that will be parse ".properties" file on keys and values 
-            DataLoaderService parser = new ParserPropertiesFile(subjectName + ".properties");
+            DataLoaderService parser = new ParserPropertiesFile_MultiThread(
+                    subjectName + "1.properties", subjectName + "2.properties");
             
             // creating adapter-object, that will be extract only necessary "person" 
             // data with "parser"

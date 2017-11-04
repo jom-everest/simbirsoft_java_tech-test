@@ -8,7 +8,7 @@ package com.simbirsoft.adapter;
 import com.simbirsoft.data_loader.Map_SL;
 import com.simbirsoft.entity.PersonInfo;
 import com.simbirsoft.data_loader.DataLoaderService;
-import java.util.ArrayList;
+import java.util.List;
 
 /** Класс создает персональные данные PersonInfo, извлекая их из обобщенного 
  загрузчика данных DataLoaderService
@@ -27,15 +27,15 @@ public class PersonDataAdapter {
         // получение ассоциативного массива данных
         Map_SL map = loader.getData();
         PersonInfo pInfo = new PersonInfo();
-        ArrayList<String> tmp;
+        List<String> tmp;
         
         // извлечение необходимых данных из ассоциативного массива
         pInfo.fio = (tmp = map.safeGet(PersonInfo.FIO)).isEmpty() ? "" : tmp.get(0);
         pInfo.dob = (tmp = map.safeGet(PersonInfo.DOB)).isEmpty() ? "" : tmp.get(0);
         pInfo.email = (tmp = map.safeGet(PersonInfo.EMAIL)).isEmpty() ? "" : tmp.get(0);
-        pInfo.skype = (tmp = map.get(PersonInfo.SKYPE)).isEmpty() ? "" : tmp.get(0);
-        pInfo.avatar = (tmp = map.get(PersonInfo.AVATAR)).isEmpty() ? "" : tmp.get(0);
-        pInfo.phone = (tmp = map.get(PersonInfo.PHONE)).isEmpty() ? "" : tmp.get(0);
+        pInfo.skype = (tmp = map.safeGet(PersonInfo.SKYPE)).isEmpty() ? "" : tmp.get(0);
+        pInfo.avatar = (tmp = map.safeGet(PersonInfo.AVATAR)).isEmpty() ? "" : tmp.get(0);
+        pInfo.phone = (tmp = map.safeGet(PersonInfo.PHONE)).isEmpty() ? "" : tmp.get(0);
         
         pInfo.education = map.safeGet(PersonInfo.EDUCATION);
         pInfo.add_education = map.safeGet(PersonInfo.ADD_EDUCATION);

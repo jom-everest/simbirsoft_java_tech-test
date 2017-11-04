@@ -8,13 +8,14 @@ package com.simbirsoft.data_loader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 
 public class Map_SL extends HashMap<String, ArrayList<String>> {
     
-    public ArrayList<String> safeGet(String key) {
-        ArrayList tmp = get(key);
-        return (tmp == null) ? (ArrayList)Collections.emptyList() : tmp;
+    public List<String> safeGet(String key) {
+        List tmp = get(key);
+        return (tmp == null) ? (List)Collections.<String>emptyList() : tmp;
     }
     
 }

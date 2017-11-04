@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.util.List;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -91,7 +91,7 @@ public class HtmlCreator implements ViewCreatorService {
     }
     
     // создание html элемента - список
-    private String createHtmlList(ArrayList<String> list) {
+    private String createHtmlList(List<String> list) {
         if (list.isEmpty()) return "-";
         if (list.size() == 1) return list.get(0);
         
@@ -138,7 +138,7 @@ public class HtmlCreator implements ViewCreatorService {
         return html.toString();
     }
     
-    private String getHtml_profBlock(ArrayList<String> list, String descr, String shortName) {
+    private String getHtml_profBlock(List<String> list, String descr, String shortName) {
         StringBuilder buff = new StringBuilder();
         buff.append("<div class=\"").append(shortName).append("\"><h4> ").
                 append(descr).append(": </h4>\n").append(createHtmlList(list)).

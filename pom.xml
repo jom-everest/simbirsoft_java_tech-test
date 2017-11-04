@@ -31,7 +31,7 @@
         <version>3.7.0</version>
         <configuration>
 		  <optimize>true</optimize>
-		  <debug>false</debug>
+		  <debug>true</debug>
 		</configuration>
       </plugin>
 	
@@ -39,26 +39,6 @@
         <groupId>org.apache.maven.plugins</groupId>
 		<artifactId>maven-resources-plugin</artifactId>
 		<version>3.0.2</version>
-		<executions>
-          <execution>
-            <id>resources</id>
-            <phase>process-resources</phase>
-            <goals>
-			  <goal>copy-resources</goal>
-            </goals>
-            <configuration>
-              <outputDirectory>${project.basedir}/build</outputDirectory>
-			  <resources>
-                <resource>
-                  <directory>src/main/resources</directory>
-                  <includes>
-                    <include>*.properties</include>
-                  </includes>
-                </resource>
-              </resources>
-            </configuration>
-          </execution>
-        </executions>
       </plugin>
 
       <plugin>
