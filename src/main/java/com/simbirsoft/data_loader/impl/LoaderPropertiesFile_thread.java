@@ -22,13 +22,13 @@ import java.util.regex.Pattern;
  *
  * @author slava
  */
-public class LoaderPopertiesFile_thread implements Runnable {
+public class LoaderPropertiesFile_thread implements Runnable {
     
     private final Map_SL propertiesData;
     private final String fileName;
     private final StringBuffer errMessage;
     
-    public LoaderPopertiesFile_thread(Map_SL map, String fileName, StringBuffer errMessage) {
+    public LoaderPropertiesFile_thread(Map_SL map, String fileName, StringBuffer errMessage) {
         this.propertiesData = map;
         this.fileName = fileName;
         this.errMessage = errMessage;

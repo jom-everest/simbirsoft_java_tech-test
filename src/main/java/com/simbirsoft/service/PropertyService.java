@@ -18,15 +18,11 @@ import com.simbirsoft.data_loader.DataLoaderInterface;
 @Component
 public class PropertyService  {
     
-//    @Autowired
-//    private DataLoaderInterface dataLoader;
-    
     @Autowired
     private PersonDataAdapter adapter;
     
     public PersonInfo getData() {
         try {
-//            adapter.setLoader(dataLoader);
             return adapter.getData();
         }
         catch (DataLoaderInterface.DataLoaderException e) {

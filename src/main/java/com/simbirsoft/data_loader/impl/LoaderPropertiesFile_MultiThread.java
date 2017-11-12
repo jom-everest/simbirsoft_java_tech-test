@@ -33,8 +33,8 @@ public class LoaderPropertiesFile_MultiThread implements DataLoaderInterface {
         StringBuffer errMessage = new StringBuffer();
         
         ExecutorService executor = Executors.newFixedThreadPool(2);
-        Runnable thread1 = new LoaderPopertiesFile_thread(propertiesData, propertiesFileName1, errMessage);
-        Runnable thread2 = new LoaderPopertiesFile_thread(propertiesData, propertiesFileName2, errMessage);
+        Runnable thread1 = new LoaderPropertiesFile_thread(propertiesData, propertiesFileName1, errMessage);
+        Runnable thread2 = new LoaderPropertiesFile_thread(propertiesData, propertiesFileName2, errMessage);
         executor.submit(thread1);
         executor.submit(thread2);
         
