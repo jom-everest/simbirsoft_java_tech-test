@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src=\"https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js\"></script>
+      <script src=\"https://oss.maxcdn.com/respond/1.4.2/respond.min.js\"></script>
+    <![endif]-->
+    <style>
+		body {width:800px; margin:5px auto;}
+		div.private {margin-top:15px;}
+    </style>
+  </head>
+  
+ <body> 
+  <h3 align="center">Резюме</h3> 
+  <h4 align="center">на должность Java-junior</h4> 
+  <div class="row private"> 
+   <div class="col-md-8 col-xs-12"> 
+    <div class="row"> 
+     <div class="col-xs-6" align="right"> 
+      <b>ФИО:</b> 
+     </div> 
+     <div class="col-xs-6 fio" th:text="${person.fio}"></div> 
+    </div>
+    <div class="row"> 
+     <div class="col-xs-6" align="right"> 
+      <b>Дата рождения:</b> 
+     </div> 
+     <div class="col-xs-6 dob" th:text="${person.dob} ? ${person.dob} : '-'"></div> 
+    </div>
+    <div class="row"> 
+     <div class="col-xs-6" align="right"> 
+      <b>Телефон:</b> 
+     </div> 
+     <div class="col-xs-6 phone" th:text="${person.phone} ? ${person.phone} : '-'"></div> 
+    </div>
+    <div class="row"> 
+     <div class="col-xs-6" align="right"> 
+      <b>E-mail:</b> 
+     </div> 
+     <div class="col-xs-6 email" th:text="${person.email} ? ${person.email} : '-'"></div> 
+    </div>
+    <div class="row"> 
+     <div class="col-xs-6" align="right"> 
+      <b>Skype:</b> 
+     </div> 
+     <div class="col-xs-6 skype" th:text="${person.skype} ? ${person.skype} : '-'"></div> 
+    </div>
+   </div> 
+   <div class="avatar col-xs-6 col-md-4">
+    <img th:src="${person.avatar}"/>
+   </div> 
+  </div>
+  
+  <div class="prof">
+  
+   <div class="target">
+    <h4> Цель: </h4> 
+	<div th:switch="${person.target}"> 
+		<div th:case="null">-</div>
+		<div th:case="*">
+			<ul>
+				<li th:each="i : ${person.target}">
+					<span th:text="${i}"></span>
+				</li>
+			</ul> 
+		</div>
+	</div>
+   </div>
+   
+   <div class="experience">
+    <h4> Опыт работы: </h4> 
+	<div th:switch="${person.experience}"> 
+		<div th:case="null">-</div>
+		<div th:case="*">
+			<ul>
+				<li th:each="i : ${person.experience}">
+					<span th:text="${i}"></span>
+				</li>
+			</ul> 
+		</div>
+	</div>
+   </div>
+   
+   <div class="education">
+    <h4> Образование: </h4>
+	<div th:switch="${person.education}"> 
+		<div th:case="null">-</div>
+		<div th:case="*">
+			<ul>
+				<li th:each="i : ${person.education}">
+					<span th:text="${i}"></span>
+				</li>
+			</ul> 
+		</div>
+	</div>
+   </div>
+   
+   <div class="add_education">
+    <h4> Дополнительное образование и курсы: </h4>
+	<div th:switch="${person.add_education}"> 
+		<div th:case="null">-</div>
+		<div th:case="*">
+			<ul>
+				<li th:each="i : ${person.add_education}">
+					<span th:text="${i}"></span>
+				</li>
+			</ul> 
+		</div>
+	</div>
+   </div>
+   
+   <div class="skills">
+    <h4> Навыки: </h4> 
+	<div th:switch="${person.skills}"> 
+		<div th:case="null">-</div>
+		<div th:case="*">
+			<ul>
+				<li th:each="i : ${person.skills}">
+					<span th:text="${i}"></span>
+				</li>
+			</ul> 
+		</div>
+	</div>
+   </div>
+   <div class="hobbies">
+    <h4> Хобби: </h4> 
+	<div th:switch="${person.hobbies}"> 
+		<div th:case="null">-</div>
+		<div th:case="*">
+			<ul>
+				<li th:each="i : ${person.hobbies}">
+					<span th:text="${i}"></span>
+				</li>
+			</ul> 
+		</div>
+	</div>
+   </div>
+  </div> 
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+  <!-- Include all compiled plugins (below), or include individual files as needed --> 
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  
+ </body>
+</html>
