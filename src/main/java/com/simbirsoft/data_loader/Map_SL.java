@@ -14,7 +14,7 @@ import java.util.List;
 public class Map_SL extends HashMap<String, ArrayList<String>> {
     
     public List<String> safeGet(String key) {
-        List tmp = get(key);
+        List<String> tmp = get(key);
         return (tmp == null) ? (List)Collections.<String>emptyList() : tmp;
     }
     

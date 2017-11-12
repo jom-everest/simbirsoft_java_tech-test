@@ -1,7 +1,6 @@
-package com.simbirsoft.service.impl_htmlcreator;
+package com.simbirsoft.view_creator.impl_htmlcreator;
 
 import com.simbirsoft.entity.PersonInfo;
-import com.simbirsoft.service.ViewCreatorService;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -10,14 +9,14 @@ import java.util.List;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import com.simbirsoft.view_creator.ViewCreatorInterface;
 
 /** Создание html файла по персональным данным PersonInfo
  *
  * @author slava
  */
 
-
-public class HtmlCreator implements ViewCreatorService {
+public class HtmlCreator implements ViewCreatorInterface {
     String fileName = "summary.html";
     
     // первоначальный html шаблон 

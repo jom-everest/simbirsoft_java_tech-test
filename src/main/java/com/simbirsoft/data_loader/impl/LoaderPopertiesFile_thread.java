@@ -22,13 +22,13 @@ import java.util.regex.Pattern;
  *
  * @author slava
  */
-public class PropertiesReader implements Runnable {
+public class LoaderPopertiesFile_thread implements Runnable {
     
     private final Map_SL propertiesData;
     private final String fileName;
     private final StringBuffer errMessage;
     
-    public PropertiesReader(Map_SL map, String fileName, StringBuffer errMessage) {
+    public LoaderPopertiesFile_thread(Map_SL map, String fileName, StringBuffer errMessage) {
         this.propertiesData = map;
         this.fileName = fileName;
         this.errMessage = errMessage;
@@ -73,7 +73,7 @@ public class PropertiesReader implements Runnable {
             errMessage.append(e.getMessage());
         }
         catch (NullPointerException e) {
-            errMessage.append("Файл не найден: " + fileName + "\n");
+            errMessage.append("Файл настроек не найден: " + fileName + "\n");
         }
         catch (RuntimeException e) {
             errMessage.append("Some unregister error: " + e.getMessage());

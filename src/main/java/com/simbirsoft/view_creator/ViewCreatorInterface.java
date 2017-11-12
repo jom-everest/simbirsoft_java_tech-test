@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.simbirsoft.service;
+package com.simbirsoft.view_creator;
 
 import com.simbirsoft.entity.PersonInfo;
 
@@ -11,7 +11,7 @@ import com.simbirsoft.entity.PersonInfo;
  *
  * @author slava
  */
-public interface ViewCreatorService {
+public interface ViewCreatorInterface {
 
     /**
      * <p>It's abstract method for creating an view for PersonInfo data</p>

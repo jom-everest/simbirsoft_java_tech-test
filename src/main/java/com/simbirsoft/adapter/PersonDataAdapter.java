@@ -7,23 +7,28 @@ package com.simbirsoft.adapter;
 
 import com.simbirsoft.data_loader.Map_SL;
 import com.simbirsoft.entity.PersonInfo;
-import com.simbirsoft.data_loader.DataLoaderService;
 import java.util.List;
+import com.simbirsoft.data_loader.DataLoaderInterface;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /** Класс создает персональные данные PersonInfo, извлекая их из обобщенного 
- загрузчика данных DataLoaderService
+ загрузчика данных DataLoaderInterface
  *
  * @author slava
  */
+
+@Component
 public class PersonDataAdapter {
-    private final DataLoaderService loader;
+    private final DataLoaderInterface loader;
     
-    public PersonDataAdapter(DataLoaderService ld) {
+    @Autowired
+    public PersonDataAdapter(DataLoaderInterface ld) {
         loader = ld;
     }
     
     // формирование данных PersonInfo
-    public PersonInfo getData() throws DataLoaderService.DataLoaderException {
+    public PersonInfo getData() throws DataLoaderInterface.DataLoaderException {
         // получение ассоциативного массива данных
         Map_SL map = loader.getData();
         PersonInfo pInfo = new PersonInfo();
