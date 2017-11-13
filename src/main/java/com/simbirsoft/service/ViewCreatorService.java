@@ -20,15 +20,6 @@ public interface ViewCreatorService {
      * @throws ViewCreatorException
      */
     void create(PersonInfo personInfo)throws ViewCreatorException;
-    
-    class ViewCreatorException extends Exception {
-        public ViewCreatorException(String msg) {
-            super(msg);
-        }
-        public ViewCreatorException(Exception e) {
-            super(e);
-        }
-    }
 }
 
 

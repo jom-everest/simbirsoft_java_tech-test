@@ -1,11 +1,15 @@
 package com.simbirsoft;
 
 import com.simbirsoft.adapter.PersonDataAdapter;
+import com.simbirsoft.data_loader.DataLoaderException;
 import com.simbirsoft.entity.PersonInfo;
 import com.simbirsoft.data_loader.DataLoaderService;
 import com.simbirsoft.data_loader.impl.ParserPropertiesFile_MultiThread;
+import com.simbirsoft.service.ViewCreatorException;
 import com.simbirsoft.service.impl_htmlcreator.HtmlCreator;
 import com.simbirsoft.service.ViewCreatorService;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -16,18 +20,10 @@ public class Application {
 
     /**
      * @param args аргумент 
-     * 1. может содержать имя ".properties" файла, содержащие данные о соискателе 
-     * в формате "ключ" = "значение", и из данных, которых будет сформирован
-     * "summary html" файл; в этом случае имя файла указывается без расширения 
-     * ".properties", например просто "gavrilov", а в дальнейшем программа сама 
-     * самостоятельно будет искать в текущем каталоге (в том откуда она была вызвана)
-     * полное имя файла "gavrilov.properties"
-     * 2. может быть не указан, в таком случае ".properties" файл по умолчанию 
-     * будет принят файл "bobunov.properties".
-     * 
-     * Замечания: "properties" файл будет искаться в том же каталоге из которого 
-     * вызывается программа
      */
+    
+    private final static Logger LOGGER = Logger.getLogger("MainApp");
+    
     public static void main(String[] args) {
 
         String subjectName = "bobunov";
@@ -50,12 +46,12 @@ public class Application {
             ViewCreatorService viewCreator = new HtmlCreator(viewFileName);
             viewCreator.create(pInfo);
             
-            System.out.println(viewFileName + " was created successfully");
+            LOGGER.log(Level.INFO, "{0} was created successfully", viewFileName);
             
-        } catch (DataLoaderService.DataLoaderException e) {
-            System.err.println(e.getMessage());
-        } catch (ViewCreatorService.ViewCreatorException e) {
-            System.err.println(e.getMessage());
+        } catch (DataLoaderException e) {
+            LOGGER.warning(e.getMessage());
+        } catch (ViewCreatorException e) {
+            LOGGER.warning(e.getMessage());
         }
     }
 }

@@ -5,11 +5,13 @@
  */
 package com.simbirsoft.data_loader.impl;
 
+import com.simbirsoft.data_loader.DataLoaderException;
 import com.simbirsoft.data_loader.DataLoaderService;
 import com.simbirsoft.data_loader.Map_SL;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,6 +19,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class ParserPropertiesFile_MultiThread implements DataLoaderService {
     
+    private final static Logger LOGGER = Logger.getLogger("PropertiesFileReader");
     private final String propertiesFileName1;
     private final String propertiesFileName2;
     
@@ -37,16 +40,17 @@ public class ParserPropertiesFile_MultiThread implements DataLoaderService {
         executor.submit(thread2);
         
         try {
-            // ожидание оканчания выполнения потоков
+            // ожидание окончания выполнения потоков
             executor.shutdown();
             executor.awaitTermination(10, TimeUnit.SECONDS);
         } 
         catch (InterruptedException e) {
+            LOGGER.warning("Выполнение прервано");
         }
         finally {
             if (!executor.isTerminated()) {
                 executor.shutdownNow();
-                System.err.println("Threads executes very long, some problem happened obviously");
+                LOGGER.warning("Threads executes very long, some problem happened obviously");
                 throw new DataLoaderException("Проблема с потоками");
             }
         }

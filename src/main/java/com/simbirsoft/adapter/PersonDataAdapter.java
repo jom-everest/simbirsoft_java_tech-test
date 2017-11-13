@@ -5,6 +5,7 @@
  */
 package com.simbirsoft.adapter;
 
+import com.simbirsoft.data_loader.DataLoaderException;
 import com.simbirsoft.data_loader.Map_SL;
 import com.simbirsoft.entity.PersonInfo;
 import com.simbirsoft.data_loader.DataLoaderService;
@@ -23,7 +24,7 @@ public class PersonDataAdapter {
     }
     
     // формирование данных PersonInfo
-    public PersonInfo getData() throws DataLoaderService.DataLoaderException {
+    public PersonInfo getData() throws DataLoaderException {
         // получение ассоциативного массива данных
         Map_SL map = loader.getData();
         PersonInfo pInfo = new PersonInfo();
