@@ -1,69 +1,27 @@
 package com.simbirsoft.service.impl_htmlcreator;
 
 import com.simbirsoft.entity.PersonInfo;
+import com.simbirsoft.service.ViewCreatorException;
 import com.simbirsoft.service.ViewCreatorService;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import org.apache.commons.io.IOUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+
 
 /** Создание html файла по персональным данным PersonInfo
  *
  * @author slava
  */
 
-
 public class HtmlCreator implements ViewCreatorService {
-    String fileName = "summary.html";
-    
-    // первоначальный html шаблон 
-    static final String SAMPLE_HTML = "<!DOCTYPE html>\n" +
-"<html lang=\"ru\">\n" +
-"  <head>\n" +
-"    <meta charset=\"utf-8\">\n" +
-"    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n" +
-"    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n" +
-"    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->\n" +
-"    <title>Bootstrap 101 Template</title>\n" +
-"\n" +
-"    <!-- Bootstrap -->\n" +
-"	<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\"> \n" +
-"    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->\n" +
-"    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->\n" +
-"    <!--[if lt IE 9]>\n" +
-"      <script src=\"https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js\"></script>\n" +
-"      <script src=\"https://oss.maxcdn.com/respond/1.4.2/respond.min.js\"></script>\n" +
-"    <![endif]-->\n" +
-"    <style>\n" +
-"		body {width:800px; margin:5px auto;}\n" +
-"		div.private {margin-top:15px;}\n" +
-"    </style>\n" +
-"  </head>\n" +
-"  <body>\n" +
-"\n" +
-"    <h3 align=\"center\">Резюме</h3>\n" +
-"    <h4 align=\"center\">на должность Java-junior</h4>\n" +
-"      \n" +
-"    <div class=\"row private\">\n" +
-"		<div class=\"col-md-8 col-xs-12\">\n" +
-"		</div>\n" +
-"        <div class=\"avatar col-xs-6 col-md-4\">\n" +
-"            <img src=\"\"/>\n" +
-"        </div>\n" +
-"    </div>\n" +
-"	\n" +
-"	<div class=\"prof\">\n" +
-"	</div>\n" +
-"    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->\n" +
-"    <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js\"></script>\n" +
-"    <!-- Include all compiled plugins (below), or include individual files as needed -->\n" +
-"    <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\"></script>\n" +
-"  </body>\n" +
-"</html>";
+    String fileName;
+    final String SUMMARY_TEMPLATE = "summary_template.html";
     
     public final void setFileName(String fn) {
         fileName = fn;
@@ -75,13 +33,16 @@ public class HtmlCreator implements ViewCreatorService {
     
     @Override
     public void create(PersonInfo pInfo) throws ViewCreatorException{
-        String htmlStr = modifyHtml(pInfo);
         try {
+            String htmlStr = modifyHtml(pInfo);
             // попытка сохранить строку в файл
             saveStrToFile(htmlStr, fileName);
         }
-        catch (IOException e) {
-            throw new ViewCreatorException(e.getMessage());
+        catch (NullPointerException ex) {
+            throw new ViewCreatorException("Absent resource file: " + SUMMARY_TEMPLATE);
+        }
+        catch (IOException ex) {
+            throw new ViewCreatorException(ex.getMessage());
         }
     }
     
@@ -111,9 +72,13 @@ public class HtmlCreator implements ViewCreatorService {
     }
 
     // метод формирования по html шаблону html документа, с данными из Personinfo 
-    private String modifyHtml(PersonInfo pInfo) {
+    private String modifyHtml(PersonInfo pInfo) throws IOException {
 
-        Document html = Jsoup.parse(SAMPLE_HTML);
+        // чтение файла ресурсов SUMMARY_TEMPLATE и преобразование его с строку
+        String htmlString = IOUtils.toString(getClass().getClassLoader().getResourceAsStream(SUMMARY_TEMPLATE), StandardCharsets.UTF_8);
+        
+        // парсинг html шаблона
+        Document html = Jsoup.parse(htmlString);
         Element elem = html.select("div.private div").first();
         
         // вставка в найденный элемент блоков с персональными данными
@@ -148,10 +113,6 @@ public class HtmlCreator implements ViewCreatorService {
     }
     
     private String getHtml_personalBlock(String value, String descr, String shortName) {
-/*        elem.appendElement("div").addClass("row").child(0).
-                appendElement("div").addClass("col-xs-6").attr("align", "right").child(0).
-                appendElement("b").text(descr + ":");
-*/
         StringBuilder buff = new StringBuilder();
         buff.append("<div class=\"row\">\n<div class=\"col-xs-6\" align=\"right\">\n<b>").
                 append(descr).append(":").append("</b>\n</div>\n<div class=\"col-xs-6 ").

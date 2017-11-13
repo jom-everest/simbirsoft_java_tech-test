@@ -59,7 +59,7 @@ public class PropertiesReader implements Runnable {
                 ArrayList<String> values = new ArrayList<>(Arrays.asList(matcher.group(2).split("\"\\s*,\\s*\"")));
                 values.removeIf((str) -> str.isEmpty());
                 
-                // блокировка объекта
+                // синхронизация объекта
                 synchronized(propertiesData) {
                 // запись ключ + значение в массив
                     propertiesData.putIfAbsent(key, values);
@@ -67,16 +67,16 @@ public class PropertiesReader implements Runnable {
             }
         }
         catch (MalformedInputException e) {
-            errMessage.append("Кодировка входного файла не соответствует UTF_8: " + fileName + "\n");
+            errMessage.append("The encoding of the input file does not match UTF_8: ").append(fileName).append("\n");
         }
         catch (IOException e) {
             errMessage.append(e.getMessage());
         }
         catch (NullPointerException e) {
-            errMessage.append("Файл не найден: " + fileName + "\n");
+            errMessage.append("File not found: ").append(fileName).append("\n");
         }
         catch (RuntimeException e) {
-            errMessage.append("Some unregister error: " + e.getMessage());
+            errMessage.append("Some unregister error: ").append(e.getMessage());
         }
     }
     
