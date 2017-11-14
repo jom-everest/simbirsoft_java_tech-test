@@ -39,20 +39,19 @@ public class ParserPropertiesFile_MultiThread implements DataLoaderService {
         executor.submit(thread1);
         executor.submit(thread2);
         
+        executor.shutdown();
         try {
             // ожидание окончания выполнения потоков
-            executor.shutdown();
-            executor.awaitTermination(10, TimeUnit.SECONDS);
-        } 
-        catch (InterruptedException e) {
-            LOGGER.warning("Execution is interrupted");
-        }
-        finally {
-            if (!executor.isTerminated()) {
+            if (!executor.awaitTermination(10, TimeUnit.SECONDS)) {
                 executor.shutdownNow();
                 LOGGER.warning("Threads executes very long, some problem happened obviously");
                 throw new DataLoaderException("Some problem");
             }
+        } 
+        catch (InterruptedException ex) {
+            LOGGER.warning("Execution is interrupted");
+            executor.shutdownNow();
+            throw new DataLoaderException("Execution is interrupted");
         }
         
         if (errMessage.length() != 0) {
