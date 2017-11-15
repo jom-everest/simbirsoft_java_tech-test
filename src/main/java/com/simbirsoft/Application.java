@@ -17,6 +17,6 @@ public class Application {
      * @param args аргумент 
      */
     public static void main(String[] args) {
-        SpringApplication.run(new Class<?>[] {Application.class, PersonProperties.class}, args);
+        SpringApplication.run(new Class<?>[] {Application.class}, args);
     }
 }
