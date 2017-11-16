@@ -53,9 +53,9 @@
 
             <div class="row">
               <div class="form-group col-md-12">
-                <label class="col-md-2 control-lable" for="file">Hobbies</label>
+                <label class="col-md-2 control-lable" for="file">Tags</label>
                 <div class="col-md-7">
-                  <input type="text" ng-model="ctrl.person.hobbies" name="hobbies" class="form-control input-sm" placeholder="Enter Hobbies"/>
+                  <input type="text" ng-model="ctrl.person.tagsStr" name="tags" class="form-control input-sm" placeholder="Enter Tags"/>
                 </div>
               </div>
             </div>
@@ -80,7 +80,7 @@
                 <th>Name</th>
                 <th>Developer</th>
                 <th>Email</th>
-                <th>Hobbies</th>
+                <th>Tags</th>
                 <th width="20%"></th>
               </tr>
             </thead>
@@ -90,7 +90,7 @@
                 <td><span ng-bind="p.fio"></span></td>
                 <td><span ng-bind="p.developer"></span></td>
                 <td><span ng-bind="p.email"></span></td>
-                <td><span ng-bind="p.hobbies"></span></td>
+                <td><span ng-bind="p.tagsStr"></span></td>
                 <td>
                   <button type="button" ng-click="ctrl.edit(p.id)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.remove(p.id)" class="btn btn-danger custom-width">Remove</button>
                 </td>

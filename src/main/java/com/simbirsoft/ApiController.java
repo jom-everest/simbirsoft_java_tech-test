@@ -25,6 +25,9 @@ public class ApiController {
     @Autowired
     PersonRepository personRepo;
     
+    @Autowired
+    TagRepository tagRepo;
+    
     @GetMapping("/person/")
     public List<Person> listAllPersons() {
         return personRepo.findAll();
@@ -39,14 +42,15 @@ public class ApiController {
     public void deletePerson(@PathVariable("id") Long id) {
         personRepo.delete(id);
     }
-    
+
     @PutMapping("/person/{id}")
+//      @Transactional
     public Person updatePerson(@RequestBody Person person) {
         return personRepo.save(person);
     }
-	
+
     @PostMapping("/person/")
-    public Person createPerson(@RequestBody Person person) {
+    public Person savePerson(@RequestBody Person person) {
         person.setId(null);
         return personRepo.save(person);
     }

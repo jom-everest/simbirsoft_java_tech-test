@@ -5,9 +5,16 @@
  */
 package com.simbirsoft;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
@@ -25,15 +32,34 @@ public class Person {
     private String developer;
     private String email;
     private String hobbies;
-
-    public Person() {}
     
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "person_tag",
+        joinColumns = @JoinColumn(name="person_id", referencedColumnName="id"),
+        inverseJoinColumns = @JoinColumn(name = "tag", referencedColumnName = "name"))
+    private List<Tag> tags = null;
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+    
+   public Person() {}
+
     public Person(Long id, String fio, String developer, String email, String hobbies) {
         this.id = id;
         this.fio = fio;
         this.developer = developer;
         this.email = email;
         this.hobbies = hobbies;
+    }
+    
+    public Person(Long id, String fio, String developer, String email, String hobbies, List<Tag> tags) {
+        this.id = id;
+        this.fio = fio;
+        this.developer = developer;
+        this.email = email;
+        this.hobbies = hobbies;
+        this.tags = tags;
     }
     
     public void setEmail(String email) {
@@ -74,5 +100,10 @@ public class Person {
 
     public void setHobbies(String hobbies) {
         this.hobbies = hobbies;
+    }
+
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 }

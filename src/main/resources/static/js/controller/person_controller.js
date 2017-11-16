@@ -2,7 +2,7 @@
 
 angular.module('App').controller('PersonController', ['$scope', 'PersonService', function($scope, PersonService) {
     var self = this;
-    self.person = {id: null, fio: '', developer: '', email: '', hobbies: ''};
+    self.person = {id: null, fio: '', developer: '', email: '', tagsStr: ''};
     self.persons = [];
 
     self.submit = submit;
@@ -17,6 +17,9 @@ angular.module('App').controller('PersonController', ['$scope', 'PersonService',
         PersonService.fetchAllPersons()
             .then(function(persons) {
                 self.persons = persons;
+				self.persons.forEach(function(p) {
+					p.tagsStr = p.tags.map(function(tag) {return tag.name;}).join(', ');
+				});
             },
             function(errResponse){
                 console.error('Error while fetching Persons');
@@ -36,6 +39,7 @@ angular.module('App').controller('PersonController', ['$scope', 'PersonService',
 	}
 
     function createPerson(person){
+		person.tags = person.tagsStr.split(',').map(function(s) { return s.trim()});
         PersonService.createPerson(person)
             .then(
             fetchAllPersons,
@@ -46,6 +50,7 @@ angular.module('App').controller('PersonController', ['$scope', 'PersonService',
     }
 
     function updatePerson(id, person){
+		person.tags = person.tagsStr.split(',').map(function(s) { return s.trim()});
         PersonService.updatePerson(id, person)
             .then(
             fetchAllPersons,
@@ -95,7 +100,7 @@ angular.module('App').controller('PersonController', ['$scope', 'PersonService',
     }
 
 	function reset(){
-        self.person = {id: null, fio: '', developer: 'Java', email: '', hobbies: 'extreme'};
+        self.person = {id: null, fio: '', developer: 'Java', email: '', hobbies: 'extreme', tagsStr:''};
         $scope.myForm.$setPristine(); //reset Form
     }
 }]);
