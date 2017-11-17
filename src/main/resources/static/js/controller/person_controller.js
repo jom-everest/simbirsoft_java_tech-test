@@ -4,15 +4,42 @@ angular.module('App').controller('PersonController', ['$scope', 'PersonService',
     var self = this;
     self.person = {id: null, fio: '', developer: '', email: '', tagsStr: ''};
     self.persons = [];
+	
+	self.tags = [];
 
     self.submit = submit;
     self.edit = edit;
     self.remove = remove;
     self.reset = reset;
-
-
+	
+	
     fetchAllPersons();
+//	fetchAllTags();
+//	setCloudSettings();
+	
+/*
+	function fetchAllTags() {
+		TagService.fetchAllTags()
+			.then(function(tags) {
+				self.tags = tags;
+			},
+			function(errResponse) {
+                console.error('Error while fetching Tags');
+			}
+		);
+	}
 
+	function fetchTag(tagId) {
+		TagService.fetchTag(tagId)
+            .then(function(tag) {
+                self.tag = tag;
+            },
+            function(errResponse){
+                console.error('Error while fetching Tag');
+            }
+        );
+	}
+*/	
     function fetchAllPersons(){
         PersonService.fetchAllPersons()
             .then(function(persons) {
@@ -103,4 +130,16 @@ angular.module('App').controller('PersonController', ['$scope', 'PersonService',
         self.person = {id: null, fio: '', developer: 'Java', email: '', hobbies: 'extreme', tagsStr:''};
         $scope.myForm.$setPristine(); //reset Form
     }
+
+/*	
+	function setCloudSettings() {
+		var entries;
+		for(var i = 0; i < self.tags.length; i++) {
+			entries[i].label = self.tags[i].name;
+			entries[i].url = "http://127.0.0.1:8080/tag/" + self.tags[i].name;
+			entries[i].target = '_top';
+		}
+		self.setting.entries = entries;
+	}
+*/	
 }]);

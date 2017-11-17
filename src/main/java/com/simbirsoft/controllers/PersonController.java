@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.simbirsoft;
+package com.simbirsoft.controllers;
 
+import com.simbirsoft.model.Person;
+import com.simbirsoft.dao.PersonRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,13 +22,10 @@ import org.springframework.web.bind.annotation.RestController;
  * @author slava
  */
 @RestController
-public class ApiController {
+public class PersonController {
     
     @Autowired
     PersonRepository personRepo;
-    
-    @Autowired
-    TagRepository tagRepo;
     
     @GetMapping("/person/")
     public List<Person> listAllPersons() {

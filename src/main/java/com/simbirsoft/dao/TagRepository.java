@@ -3,14 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.simbirsoft;
+package com.simbirsoft.dao;
 
+import com.simbirsoft.model.Tag;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author slava
  */
-public interface PersonRepository extends JpaRepository<Person, Long>{
+public interface TagRepository extends JpaRepository<Tag, String> {
     
 }

@@ -1,7 +1,8 @@
 <!doctype html>
 <html>
 	<head>
-		<title>Hello AngularJS</title>
+    <meta charset="utf-8"/> 
+		<title>Hello</title>
  		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <link href="./css/app.css" rel="stylesheet"/>
@@ -15,6 +16,7 @@
         <div class="formcontainer">
           <form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
             <input type="hidden" ng-model="ctrl.person.id" />
+            
             <div class="row">
               <div class="form-group col-md-12">
                 <label class="col-md-2 control-lable" for="file">Name</label>
@@ -67,6 +69,7 @@
               </div>
             </div>
           </form>
+          
         </div>
       </div>
 
@@ -102,6 +105,7 @@
     </div>
 		<script src="./js/app.js"></script>
 		<script src="./js/service/person_service.js"></script>
+		<script src="./js/service/tag_service.js"></script>
 		<script src="./js/controller/person_controller.js"></script>
 	</body>
 </html>

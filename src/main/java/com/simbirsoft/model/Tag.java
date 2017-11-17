@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.simbirsoft;
+package com.simbirsoft.model;
 
+import com.simbirsoft.model.Person;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
 import javax.persistence.Column;
