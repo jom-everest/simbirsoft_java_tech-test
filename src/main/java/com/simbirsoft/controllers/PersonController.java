@@ -43,14 +43,17 @@ public class PersonController {
     }
 
     @PutMapping("/person/{id}")
-//      @Transactional
     public Person updatePerson(@RequestBody Person person) {
+        if (person.getTags().get(0).getName().isEmpty()) 
+            person.setTags(null);
         return personRepo.save(person);
     }
 
     @PostMapping("/person/")
     public Person savePerson(@RequestBody Person person) {
         person.setId(null);
+        if (person.getTags().get(0).getName().isEmpty()) 
+            person.setTags(null);
         return personRepo.save(person);
     }
 

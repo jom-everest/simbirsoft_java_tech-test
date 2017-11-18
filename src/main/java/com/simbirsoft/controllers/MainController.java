@@ -5,12 +5,10 @@
  */
 package com.simbirsoft.controllers;
 
-import com.simbirsoft.dao.TagRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -20,24 +18,20 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class MainController {
     
-    @Autowired
-    TagRepository tagRepo;
-    
+/*    
     @GetMapping("/")
     public String getMainPage() {
         return "index";
     }
-
-    @GetMapping("/{tag}")
-    public ModelAndView getMainPageTag(@PathVariable("tag") String tag) {
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("index");
-        mv.addObject("tag", tagRepo.getOne(tag));
-        return mv;
+*/
+    @GetMapping("/list")
+    public String getMainPageTag(@RequestParam(value = "tag", required = false, defaultValue = "") String tag, Model model) {
+        model.addAttribute("tag", tag);
+        return "list";
     }
- 
-    @GetMapping("/cloud")
+    
+    @GetMapping("/")
     public String getTagCloud() {
-        return "tag_cloud";
+        return "index";
     }
 }

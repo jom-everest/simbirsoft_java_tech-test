@@ -20,7 +20,7 @@ angular.module('App').service('TagService', ['$http', '$q', function($http, $q) 
 				return deferred.promise;
 			},
 			
-			fetchTag: function(tagId) {
+			fetchPersonsByTag: function(tagId) {
 				var deferred = $q.defer();
 				$http.get(REST_SERVICE_URI+tagId)
 				.then(function (response) {

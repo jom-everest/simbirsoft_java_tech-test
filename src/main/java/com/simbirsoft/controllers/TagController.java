@@ -7,6 +7,7 @@ package com.simbirsoft.controllers;
 
 import com.simbirsoft.model.Tag;
 import com.simbirsoft.dao.TagRepository;
+import com.simbirsoft.model.Person;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +31,7 @@ public class TagController {
     }
     
     @GetMapping("/tag/{tag}")
-    public Tag getTag(@PathVariable("tag") String tag) {
-        return tagRepo.findOne(tag);
+    public List<Person> getPersonsByTag(@PathVariable("tag") String tag) {
+        return tagRepo.findOne(tag).getPersons();
     }
 }

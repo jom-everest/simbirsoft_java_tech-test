@@ -5,7 +5,6 @@
  */
 package com.simbirsoft.model;
 
-import com.simbirsoft.model.Person;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
 import javax.persistence.Column;

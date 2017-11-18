@@ -1,111 +1,50 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-	<head>
-    <meta charset="utf-8"/> 
-		<title>Hello</title>
- 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <link href="./css/app.css" rel="stylesheet"/>
-	</head>
 
-	<body ng-app="App" class="ng-cloak">
-		<div class="generic-container" ng-controller="PersonController as ctrl">
+<head>
+
+    <meta charset='utf-8'/>
+    <title></title>
+ 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src='./js/lib/jquery.svg3dtagcloud.min.js'></script>
+
+    <style type='text/css'>
+
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, font, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            outline: 0;
+            font-size: 100%;
+            vertical-align: baseline;
+            background: transparent;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            background-color: #000;
+        }
+
+    </style>
+</head>
+
+<body>
+		<div class="generic-container">
       <div class="panel panel-default">
-      
-        <div class="panel-heading"><span class="lead">Person Registration Form </span></div>
-        <div class="formcontainer">
-          <form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
-            <input type="hidden" ng-model="ctrl.person.id" />
-            
-            <div class="row">
-              <div class="form-group col-md-12">
-                <label class="col-md-2 control-lable" for="file">Name</label>
-                <div class="col-md-7">
-                  <input type="text" ng-model="ctrl.person.fio" name="uname" class="username form-control input-sm" placeholder="Enter Name"/>
-                  <div class="has-error" ng-show="myForm.$dirty">
-                    <span ng-show="myForm.uname.$error.required">This is a required field</span>
-                    <span ng-show="myForm.uname.$error.minlength">Minimum length required is 3</span>
-                    <span ng-show="myForm.uname.$invalid">This field is invalid </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-              
-            <div class="row">
-              <div class="form-group col-md-12">
-                <label class="col-md-2 control-lable" for="file">Developer</label>
-                <div class="col-md-7">
-                  <input type="text" ng-model="ctrl.person.developer" class="form-control input-sm" placeholder="Enter Developer. [This field is validation free]"/>
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="form-group col-md-12">
-                <label class="col-md-2 control-lable" for="file">Email</label>
-                <div class="col-md-7">
-                  <input type="email" ng-model="ctrl.person.email" name="email" class="email form-control input-sm" placeholder="Enter Email"/>
-                  <div class="has-error" ng-show="myForm.$dirty">
-                    <span ng-show="myForm.email.$error.required">This is a required field</span>
-                    <span ng-show="myForm.email.$invalid">This field is invalid </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="form-group col-md-12">
-                <label class="col-md-2 control-lable" for="file">Tags</label>
-                <div class="col-md-7">
-                  <input type="text" ng-model="ctrl.person.tagsStr" name="tags" class="form-control input-sm" placeholder="Enter Tags"/>
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="form-actions floatRight">
-                <input type="submit"  value="{{!ctrl.person.id ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid"/>
-                <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset Form</button>
-              </div>
-            </div>
-          </form>
-          
-        </div>
-      </div>
-
-		  <div class="panel panel-default">
-        <div class="panel-heading"><span class="lead">List of Persons</span></div>
-        <div class="tablecontainer">
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th>ID.</th>
-                <th>Name</th>
-                <th>Developer</th>
-                <th>Email</th>
-                <th>Tags</th>
-                <th width="20%"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="p in ctrl.persons">
-                <td><span ng-bind="p.id"></span></td>
-                <td><span ng-bind="p.fio"></span></td>
-                <td><span ng-bind="p.developer"></span></td>
-                <td><span ng-bind="p.email"></span></td>
-                <td><span ng-bind="p.tagsStr"></span></td>
-                <td>
-                  <button type="button" ng-click="ctrl.edit(p.id)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.remove(p.id)" class="btn btn-danger custom-width">Remove</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <div class="panel-heading"><span class="lead">Cloud of Tags</span></div>
+        <div id='tag_cloud'></div>
       </div>
     </div>
-		<script src="./js/app.js"></script>
-		<script src="./js/service/person_service.js"></script>
-		<script src="./js/service/tag_service.js"></script>
-		<script src="./js/controller/person_controller.js"></script>
-	</body>
+</body>
+    <script src='./js/cloud_service.js'></script>
 </html>

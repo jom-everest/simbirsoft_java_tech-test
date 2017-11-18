@@ -40,7 +40,7 @@
             for (var i = 0; i < data.length; i++) {
                 entries[i] = {
 					label: data[i].name,
-					url: "http://127.0.0.1:8080/" + data[i].name,
+					url: "http://127.0.0.1:8080/list?tag=" + data[i].name,
                     target: '_top'
 				}
             }

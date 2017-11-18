@@ -1,21 +1,22 @@
 'use strict';
 
-angular.module('App').controller('PersonController', ['$scope', 'PersonService', function($scope, PersonService) {
+angular.module('App').controller('PersonController', ['$scope', 'PersonService', 'TagService', function($scope, PersonService, TagService) {
     var self = this;
     self.person = {id: null, fio: '', developer: '', email: '', tagsStr: ''};
     self.persons = [];
-	
-	self.tags = [];
 
     self.submit = submit;
     self.edit = edit;
     self.remove = remove;
     self.reset = reset;
 	
-	
-    fetchAllPersons();
+	self.tag = document.getElementById('tag_id').value;
+	if (self.tag === "")
+		fetchAllPersons();
+	else 
+		fetchPersonsByTag(self.tag);
 //	fetchAllTags();
-//	setCloudSettings();
+
 	
 /*
 	function fetchAllTags() {
@@ -29,17 +30,21 @@ angular.module('App').controller('PersonController', ['$scope', 'PersonService',
 		);
 	}
 
-	function fetchTag(tagId) {
-		TagService.fetchTag(tagId)
-            .then(function(tag) {
-                self.tag = tag;
+*/
+	function fetchPersonsByTag(tagId) {
+		TagService.fetchPersonsByTag(tagId)
+            .then(function(persons) {
+                self.persons = persons;
+				self.persons.forEach(function(p) {
+					p.tagsStr = p.tags.map(function(tag) {return tag.name;}).join(', ');
+				});
             },
             function(errResponse){
-                console.error('Error while fetching Tag');
+                console.error('Error while fetching PersonsByTag');
             }
         );
 	}
-*/	
+
     function fetchAllPersons(){
         PersonService.fetchAllPersons()
             .then(function(persons) {
@@ -131,15 +136,4 @@ angular.module('App').controller('PersonController', ['$scope', 'PersonService',
         $scope.myForm.$setPristine(); //reset Form
     }
 
-/*	
-	function setCloudSettings() {
-		var entries;
-		for(var i = 0; i < self.tags.length; i++) {
-			entries[i].label = self.tags[i].name;
-			entries[i].url = "http://127.0.0.1:8080/tag/" + self.tags[i].name;
-			entries[i].target = '_top';
-		}
-		self.setting.entries = entries;
-	}
-*/	
 }]);
