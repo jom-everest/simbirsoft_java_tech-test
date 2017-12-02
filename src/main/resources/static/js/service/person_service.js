@@ -41,7 +41,7 @@ angular.module('App').service('PersonService', ['$http', '$q', function($http, $
 						deferred.resolve(response.data);
 					},
 					function(errResponse){
-						console.error('Error while creating User');
+						console.error('Error while creating Person');
 						deferred.reject(errResponse);
 					}
 				);
